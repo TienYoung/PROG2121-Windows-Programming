@@ -10,6 +10,7 @@ namespace A01
     {
         static void Main(string[] args)
         {
+            Console.ReadKey();
         }
     }
 }
