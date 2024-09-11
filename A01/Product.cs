@@ -27,18 +27,16 @@ namespace A01
                 "Brand: {1}\n" +
                 "Name: {2}\n" +
                 "Size: {3}\n" +
-                "Date stocked: {4}\n" +
+                "Date stocked: {4:d}\n" +
                 "Shelf life: {5}\n" +
                 "Base retail price: {6}\n" +
                 "Discount: {7}\n" +
                 "Discounted Price: {8}\n", 
-                SKU, Brand, Name, Size, DateStocked, ShelfLife,
+                SKU, Brand, Name, Size, DateStocked, ShelfLife?.Days,
                 BaseRetailPrice, Discount, DiscountedPrice
                 );
         }
-        public Product()
-        { 
-        }
+        public Product() { }
 
         public Product(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price)
         {
