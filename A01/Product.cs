@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,19 +10,31 @@ namespace A01
 {
     internal abstract class Product
     {
-        public uint SKU { get; set; } = 0;
-        public string Brand { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public uint Size { get; set; } = 0;
-        public DateTime DateStocked { get; set; } = DateTime.MinValue;
-        public TimeSpan ShelfLife { get; set; } = TimeSpan.Zero;
-        public float BaseRetailPrice { get; set; } = 0;
-        public abstract float Discount { get; }
-        public float DiscountedPrice { get => BaseRetailPrice * (1.0f - Discount); }
+        public uint? SKU { get; set; }
+        public string Brand { get; set; }
+        public string Name { get; set; }
+        public uint? Size { get; set; }
+        public DateTime? DateStocked { get; set; }
+        public TimeSpan? ShelfLife { get; set; }
+        public float? BaseRetailPrice { get; set; }
+        public abstract float? Discount { get; }
+        public float? DiscountedPrice { get => BaseRetailPrice * (1.0f - Discount); }
 
-        public string GetProductInformation()
+        public virtual string GetProductInformation()
         {
-            return string.Empty;
+            return String.Format(
+                "SKU: {0}\n" +
+                "Brand: {1}\n" +
+                "Name: {2}\n" +
+                "Size: {3}\n" +
+                "Date stocked: {4}\n" +
+                "Shelf life: {5}\n" +
+                "Base retail price: {6}\n" +
+                "Discount: {7}\n" +
+                "Discounted Price: {8}\n", 
+                SKU, Brand, Name, Size, DateStocked, ShelfLife,
+                BaseRetailPrice, Discount, DiscountedPrice
+                );
         }
         public Product()
         { 
@@ -41,51 +54,110 @@ namespace A01
 
     internal class Dairy : Product
     {
-        public bool LactoseFree { get; set; }
-        public override float Discount => (ShelfLife - (DateTime.Now - DateStocked)).Days <= 5 ? 0.5f : 0.0f;
+        public bool? LactoseFree { get; set; }
+        public override float? Discount
+        {
+            get 
+            {
+                if (DateStocked == null)
+                {
+                    return null;
+                }
+                else 
+                {
+                    return (ShelfLife - (DateTime.Now - DateStocked))?.Days <= 5 ? 0.5f : 0.0f;
+                }
+            }
+        }
 
-        public Dairy(bool lactoseFree)
+        public Dairy() { }
+
+        public Dairy(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, bool lactoseFree):
+            base(sku, brand, name, size, date, life, price)
         {
             LactoseFree = lactoseFree;
+        }
+
+        public override string GetProductInformation()
+        {
+            return base.GetProductInformation() +
+                String.Format("Lactose Free: {0}\n", LactoseFree);
         }
     }
 
     internal class Produce : Product
     {
         public enum Category { Fruit, Vegetable }
-        public override float Discount 
+        public override float? Discount 
         {
             get
             {
-                int daysUntilExpiration = (ShelfLife - (DateTime.Now - DateStocked)).Days;
-                if (daysUntilExpiration <= 10)
-                    if (daysUntilExpiration <= 5)
-                        return 0.5f;
-                    else
-                        return 0.2f;
+                if (DateStocked == null)
+                {
+                    return null;
+                }
                 else
-                    return 0.0f;
+                {
+                    int? daysUntilExpiration = (ShelfLife - (DateTime.Now - DateStocked))?.Days;
+                    if (daysUntilExpiration <= 10)
+                        if (daysUntilExpiration <= 5)
+                            return 0.5f;
+                        else
+                            return 0.2f;
+                    else
+                        return 0.0f;
+                }
             }
         }
 
-        public Category ProductCategory { get; set; }
+        public Category? ProductCategory { get; set; }
         
-        public Produce(Category category)
+        public Produce() { }
+
+        public Produce(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, Category category) :
+            base(sku, brand, name, size, date, life, price)
         { 
             ProductCategory = category;
         }
-            
+
+        public override string GetProductInformation()
+        {
+            return base.GetProductInformation() +
+                String.Format("Product Category: {0}\n", ProductCategory);
+        }
     }
 
     internal class Cereal : Product
     {
-        public float Suger { get; set; }
+        public float? Suger { get; set; }
 
-        public override float Discount => (ShelfLife - (DateTime.Now - DateStocked)).Days < 0 ? 0.5f : 0.0f;
+        public override float? Discount
+        {
+            get
+            {
+                if (DateStocked == null)
+                {
+                    return null;
+                }
+                else 
+                { 
+                    return (ShelfLife - (DateTime.Now - DateStocked))?.Days < 0 ? 0.5f : 0.0f;
+                }
+            }
+        }
 
-        public Cereal(float suger)
+        public Cereal() { }
+
+        public Cereal(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, float suger) :
+            base(sku, brand, name, size, date, life, price)
         {
             Suger = suger;
+        }
+
+        public override string GetProductInformation()
+        {
+            return base.GetProductInformation() +
+                String.Format("Suger: {0}\n", Suger);
         }
     }
 }

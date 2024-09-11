@@ -10,6 +10,12 @@ namespace A01
     {
         static void Main(string[] args)
         {
+            Dairy d1 = new Dairy();
+            Console.WriteLine(d1.GetProductInformation());
+            Produce p1 = new Produce();
+            Console.WriteLine(p1.GetProductInformation());
+            Cereal c1 = new Cereal();
+            Console.WriteLine(c1.GetProductInformation());
             Console.ReadKey();
         }
     }
