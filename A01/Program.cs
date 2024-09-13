@@ -30,9 +30,10 @@ namespace A01
             peach.SKU = 38;
             peach.Brand = "BBB";
             peach.Name = "Peach";
-            peach.Size = 500;
+            peach.Size = 2500;
             peach.DateStocked = new DateTime(2024, 9, 9);
             peach.ShelfLife = new TimeSpan(days: 3, 0, 0, 0);
+            peach.SoldBy = Produce.SaleUnit.Package;
             peach.BaseRetailPrice = 10.0f;
             peach.ProductCategory = Produce.Category.Fruit;
             Console.WriteLine(peach.GetProductInformation());

@@ -85,6 +85,7 @@ namespace A01
 
     internal class Produce : Product
     {
+        public enum SaleUnit { Package, Weight }
         public enum Category { Fruit, Vegetable }
         public override float? Discount 
         {
@@ -109,18 +110,22 @@ namespace A01
         }
 
         public Category? ProductCategory { get; set; }
+
+        public SaleUnit? SoldBy { get; set; }
         
         public Produce() { }
 
-        public Produce(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, Category category) :
+        public Produce(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, SaleUnit soldBy, Category category) :
             base(sku, brand, name, size, date, life, price)
         { 
             ProductCategory = category;
+            SoldBy = soldBy;
         }
 
         public override string GetProductInformation()
         {
             return base.GetProductInformation() +
+                String.Format("Sold by: {0}\n", SoldBy) + 
                 String.Format("Product Category: {0}\n", ProductCategory);
         }
     }
