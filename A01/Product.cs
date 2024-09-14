@@ -96,8 +96,8 @@ namespace A01
 
     internal class Produce : Product
     {
-        public enum SaleUnit { Package, Weight }
-        public enum Category { Fruit, Vegetable }
+        public enum SaleUnit { PACKAGE, WEIGHT }
+        public enum Category { FRUIT, VEGETABLE }
         public override float? Discount 
         {
             get

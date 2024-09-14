@@ -42,9 +42,9 @@ namespace A01
             peach.Size = 2500;
             peach.DateStocked = new DateTime(2024, 9, 9);
             peach.ShelfLife = new TimeSpan(days: 3, 0, 0, 0);
-            peach.SoldBy = Produce.SaleUnit.Package;
+            peach.SoldBy = Produce.SaleUnit.PACKAGE;
             peach.BaseRetailPrice = 10.0f;
-            peach.ProductCategory = Produce.Category.Fruit;
+            peach.ProductCategory = Produce.Category.FRUIT;
             Console.WriteLine(peach.GetProductInformation());
 
             rice.SKU = 150;
