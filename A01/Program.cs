@@ -10,6 +10,8 @@ namespace A01
     {
         static void Main(string[] args)
         {
+
+            // Instantiate each of the three subclasses
             Dairy milk = new Dairy();
             Console.WriteLine(milk.GetProductInformation());
             Produce peach = new Produce();
@@ -17,6 +19,7 @@ namespace A01
             Cereal rice = new Cereal();
             Console.WriteLine(rice.GetProductInformation());
 
+            // Demonstrate accessing the inherited properties (both write and read)
             milk.SKU = 1;
             milk.Brand = "AAA";
             milk.Name = "Milk";
@@ -26,6 +29,12 @@ namespace A01
             milk.BaseRetailPrice = 3.0f;
             milk.LactoseFree = false;
             Console.WriteLine(milk.GetProductInformation());
+
+            milk.DateStocked = new DateTime(2024, 1, 1);
+            Console.WriteLine("Milk date stocked: " + milk.DateStocked);
+            Console.WriteLine("Milk discount: " + milk.Discount);
+            Console.WriteLine("Milk discounted price: " + milk.DiscountedPrice);
+            Console.WriteLine();
 
             peach.SKU = 38;
             peach.Brand = "BBB";
@@ -45,8 +54,27 @@ namespace A01
             rice.DateStocked = new DateTime(2023, 10, 25);
             rice.ShelfLife = new TimeSpan(days: 365, 0, 0, 0);
             rice.BaseRetailPrice = 2.4f;
-            rice.Suger = .3f;
+            rice.Sugar = .3f;
             Console.WriteLine(rice.GetProductInformation());
+
+            // Demonstrate accessing the unique property(s) of the subclasses
+            rice.Sugar = 0.001f;
+            Console.WriteLine("Rice sugar: " + rice.Sugar);
+
+            // Demonstrate the method(s) inherited from the parent
+            milk.GenericMethod();
+            peach.GenericMethod();
+            rice.GenericMethod();
+
+            // Demonstrate the overridden methods
+            Console.WriteLine(rice.GetProductInformation());
+
+            // Demonstrate the overloaded methods
+            Cereal wheat = new Cereal();
+            wheat = new Cereal(151, "CCC", "Wheat", 10000, new DateTime(2024, 8, 26), new TimeSpan(days: 300, 0, 0, 0), 5.0f, 0.1f);
+
+            // Demonstrate the unique methods
+            milk.UniqueMethod();
 
             Console.ReadKey();
         }

@@ -36,6 +36,12 @@ namespace A01
                 BaseRetailPrice, Discount, DiscountedPrice
                 );
         }
+
+        public void GenericMethod()
+        {
+            Console.WriteLine(this + ": This is a inherited method from the parent");
+        }
+
         public Product() { }
 
         public Product(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price)
@@ -80,6 +86,11 @@ namespace A01
         {
             return base.GetProductInformation() +
                 String.Format("Lactose Free: {0}\n", LactoseFree);
+        }
+
+        public void UniqueMethod()
+        {
+            Console.WriteLine(this + ": This is a unique method");
         }
     }
 
@@ -132,7 +143,7 @@ namespace A01
 
     internal class Cereal : Product
     {
-        public float? Suger { get; set; }
+        public float? Sugar { get; set; }
 
         public override float? Discount
         {
@@ -154,13 +165,13 @@ namespace A01
         public Cereal(uint sku, string brand, string name, uint size, DateTime date, TimeSpan life, float price, float suger) :
             base(sku, brand, name, size, date, life, price)
         {
-            Suger = suger;
+            Sugar = suger;
         }
 
         public override string GetProductInformation()
         {
             return base.GetProductInformation() +
-                String.Format("Suger: {0}\n", Suger);
+                String.Format("Suger: {0}\n", Sugar);
         }
     }
 }
