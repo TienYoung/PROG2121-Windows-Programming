@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ * FILE          : Program.cs
+ * PROJECT       : RPOG2121-A01
+ * PROGRAMMER    : Tian Yang
+ * FIRST VERSION : 2024-09-09
+ * DESCRIPTION   : 
+ *   This file contains the main entry point for the A01 project. It demonstrates the usage
+ *   of various Product subclasses (Dairy, Produce, and Cereal) by creating instances,
+ *   setting their properties, and calling their methods. The program showcases inheritance,
+ *   polymorphism, and the specific behaviors of each product type.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +18,15 @@ using System.Threading.Tasks;
 
 namespace A01
 {
+    /*
+    * NAME : Program
+    * PURPOSE : The Program class serves as the entry point for the A01 project. It demonstrates
+    * the usage and functionality of various Product subclasses (Dairy, Produce, and
+    * Cereal). The class instantiates objects of each subclass, sets their properties,
+    * and invokes their methods to showcase inheritance, polymorphism, and the specific
+    * behaviors of each product type. This class is crucial for testing and demonstrating
+    * the capabilities of the product hierarchy implemented in the project.
+    */
     internal class Program
     {
         static void Main(string[] args)
